@@ -26,6 +26,7 @@ export default function Converter() {
 
         const data = await res.json();
         setRates(data.conversion_rates);
+
       } catch (err) {
         console.error("Failed to fetch rates:", err);
       } finally {
@@ -47,8 +48,8 @@ export default function Converter() {
 
   return (
     <>
-      <p className="text-xl text-center my-3 tracking-widest">
-        Your {amount} {baseCurrency} is {convertedAmount} {targetCurrency}{" "}
+      <p className="md:text-3xl  sm:text-2xl  text-lg text-center my-3 tracking-widest">
+        Your {amount} {baseCurrency} is worth {convertedAmount} {targetCurrency}{" "}
         😄{" "}
       </p>
 

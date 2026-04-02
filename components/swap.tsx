@@ -14,12 +14,10 @@ export default function Swap() {
   };
   return (
     <>
-      <div className="bg-neutral-700 flex justify-center items-center mt-1 border rounded-lg py-1 px-1 hover:py-1.5 hover:bg-amber-900 hover:delay-100 hover:ease-in-out">
-        <button onClick={handleSwap} className="">
+        <button className="w-full  bg-neutral-700 flex justify-center items-center mt-1 border rounded-lg py-1 hover:py-1.5 hover:bg-amber-900 hover:delay-100 hover:ease-in-out" onClick={handleSwap}>
           <ArrowDownUp size={40} />
           {""}
         </button>
-      </div>
     </>
   );
 }
