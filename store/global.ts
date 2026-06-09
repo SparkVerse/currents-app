@@ -1,51 +1,48 @@
 "use client";
+
+import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { create } from "zustand/react";
+
+type TrendRate = {
+  date: string;
+  rate: number;
+};
 
 type Store = {
   base: string;
   target: string;
-    tf: string;
+  tf: string;
+
+  rates: Record<string, number>;
+  irates: TrendRate[];
 
   setBase: (baseCurrency: string) => void;
   setTarget: (targetCurrency: string) => void;
   setTf: (tf: string) => void;
 
-  rates: { [key: string]: number };
-    irates: { date: string; rate: number };
-
-  setRates: (rates: { [key: string]: number }) => void;
-  setIRates: (irates: { date: string; rate: number }) => void;
-
+  setRates: (rates: Record<string, number>) => void;
+  setIRates: (irates: TrendRate[]) => void;
 };
 
 export const useStore = create<Store>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       base: "USD",
       target: "NGN",
-       tf: "7D",
+      tf: "7D",
 
-      irates:[],
-
-      setBase: (baseCurrency) =>
-        set({
-          base: baseCurrency,
-        }),
-      setTarget: (targetCurrency) =>
-        set({
-          target: targetCurrency,
-        }),
-
-      setTf: (tf) =>
-        set({
-          tf: tf,
-        }),
       rates: {},
+      irates: [],
+
+      setBase: (base) => set({ base }),
+      setTarget: (target) => set({ target }),
+      setTf: (tf) => set({ tf }),
+
       setRates: (rates) => set({ rates }),
       setIRates: (irates) => set({ irates }),
-
     }),
-    { name: "local-storage" },
+    {
+      name: "local-storage",
+    },
   ),
 );

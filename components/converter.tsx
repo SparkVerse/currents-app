@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import  CountryOpt  from "./countryOpt";
+import CountryOpt from "./countryOpt";
 import { useStore } from "@/store/global";
 import Swap from "./swap";
 
@@ -21,12 +21,11 @@ export default function Converter() {
     const fetchRates = async () => {
       try {
         const res = await fetch(
-          "https://v6.exchangerate-api.com/v6/5557ed966731a18cf7f5619b/latest/USD",
+          `https://v6.exchangerate-api.com/v6/${process.env.NEXT_PUBLIC_EXCHANGE_API_KEY}/latest/USD`,
         );
 
         const data = await res.json();
         setRates(data.conversion_rates);
-
       } catch (err) {
         console.error("Failed to fetch rates:", err);
       } finally {
