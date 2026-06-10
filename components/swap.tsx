@@ -1,3 +1,5 @@
+"use client";
+
 import { useStore } from "@/store/global";
 import { ArrowDownUp } from "lucide-react";
 

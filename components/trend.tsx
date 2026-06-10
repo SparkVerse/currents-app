@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+
 import {
   LineChart,
   Line,
@@ -9,63 +9,15 @@ import {
   XAxis,
 } from "recharts";
 import { useStore } from "@/store/global";
-import { type FrankfurterResponse, type TrendPoint } from "../lib/response";
+import { useTrend } from "@/hooks/useTrend";
 
 export default function Trend() {
   const base = useStore((state) => state.base);
   const target = useStore((state) => state.target);
   const timeframe = useStore((state) => state.tf);
   const setTimeframe = useStore((state) => state.setTf);
-  const rates = useStore((state) => state.irates);
-  const setRates = useStore((state) => state.setIRates);
 
-  const [loading, setLoading] = useState(false);
-
-  (useEffect(() => {
-    async function fetchTrend() {
-      setLoading(true);
-
-      const today = new Date();
-      const startDate = new Date(today);
-
-      if (timeframe === "7D") startDate.setDate(today.getDate() - 7);
-      else if (timeframe === "1M") startDate.setMonth(today.getMonth() - 1);
-      else if (timeframe === "1Y")
-        startDate.setFullYear(today.getFullYear() - 1);
-
-      const start_date = startDate.toISOString().split("T")[0];
-      const end_date = today.toISOString().split("T")[0];
-
-      try {
-        const res = await fetch(
-          `https://api.frankfurter.app/${start_date}..${end_date}?from=EUR&to=${base},${target}`,
-        );
-
-        const data: FrankfurterResponse = await res.json();
-        console.log(data);
-
-        const chartData = Object.entries(data.rates)
-          .map(([date, rateObj]: [string, Record<string, number>]) => {
-            const baseRate = base === "EUR" ? 1 : rateObj[base];
-            const targetRate = target === "EUR" ? 1 : rateObj[target];
-
-            if (baseRate == null || targetRate == null) return null;
-
-            return {
-              date,
-              rate: targetRate / baseRate,
-            };
-          })
-          .filter((item): item is TrendPoint => item !== null);
-      } catch (err) {
-        console.log(err);
-      } finally {
-        setLoading(false);
-      }
-      fetchTrend();
-    }
-  }),
-    [timeframe, base, target]);
+  const { data: rates = [], isLoading } = useTrend(base, target, timeframe);
 
   const change =
     rates.length > 0 ? rates[rates.length - 1].rate - rates[0].rate : 0;
@@ -92,9 +44,9 @@ export default function Trend() {
       </div>
 
       <div className="mt-3 font-bold text-lg">
-        {loading && <span>Loading...</span>}
+        {isLoading && <span>Loading...</span>}
 
-        {!loading && rates.length > 0 && (
+        {!isLoading && rates.length > 0 && (
           <span style={{ color }}>
             {rates[rates.length - 1].rate.toFixed(2)} {base}/{target}{" "}
             {change > 0 ? "🔺" : change < 0 ? "🔻" : "➖"}
@@ -103,7 +55,7 @@ export default function Trend() {
         )}
       </div>
 
-      {!loading && rates.length > 0 && (
+      {!isLoading && rates.length > 0 && (
         <div className="mt-3 w-full h-[350px]">
           <ResponsiveContainer
             width="100%"

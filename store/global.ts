@@ -9,6 +9,8 @@ type TrendRate = {
 };
 
 type Store = {
+  amount: number;
+  setAmount: (num: number) => void;
   base: string;
   target: string;
   tf: string;
@@ -30,6 +32,12 @@ export const useStore = create<Store>()(
       base: "USD",
       target: "NGN",
       tf: "7D",
+
+      amount: 1,
+      setAmount: (num) =>
+        set({
+          amount: num,
+        }),
 
       rates: {},
       irates: [],
