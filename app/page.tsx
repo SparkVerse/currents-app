@@ -1,4 +1,5 @@
 "use client";
+
 import Converter from "@/components/converter";
 import Trend from "@/components/trend";
 import Header from "@/components/header";

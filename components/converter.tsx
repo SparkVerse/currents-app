@@ -8,8 +8,7 @@ import ConvertedAmount from "../hooks/useConvertedAmount";
 import Comment from "./comment";
 
 export default function Converter() {
-  const { data, isLoading, isError } = useRates();
-  const rates = data?.conversion_rates ?? {};
+  const { isLoading, isError } = useRates();
 
   const baseCurrency = useStore((state) => state.base);
   const setBaseCurrency = useStore((state) => state.setBase);

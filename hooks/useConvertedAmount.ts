@@ -1,3 +1,5 @@
+"use client";
+
 import { useRates } from "./useRates";
 import { useStore } from "@/store/global";
 

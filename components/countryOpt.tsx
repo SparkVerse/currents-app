@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import {
   Select,
   SelectContent,
@@ -26,7 +27,13 @@ export default function CountryOpt({ value, onChange }: Props) {
           {Countries.map((country) => (
             <SelectItem key={country.currency} value={country.currency}>
               <span className="flex items-center gap-2">
-                <img className="size-3" src={country.flag} alt={country.abb} />{" "}
+                <Image
+                  className="size-3"
+                  src={country.flag}
+                  alt={country.abb}
+                  width={24}
+                  height={24}
+                />
                 {country.label}
               </span>
             </SelectItem>

@@ -1,3 +1,5 @@
+"use client";
+
 import { TrendPoint, FrankfurterResponse } from "@/lib/response";
 import { useQuery } from "@tanstack/react-query";
 
