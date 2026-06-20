@@ -8,6 +8,7 @@ import {
   YAxis,
   XAxis,
 } from "recharts";
+import EmptyState from "./emptyState";
 import { useStore } from "@/store/global";
 import { useTrend } from "@/hooks/useTrend";
 
@@ -44,7 +45,7 @@ export default function Trend() {
       </div>
 
       <div className="mt-3 font-bold text-lg">
-        {isLoading && <span>Loading...</span>}
+        {isLoading && <EmptyState />}
 
         {!isLoading && rates.length > 0 && (
           <span style={{ color }}>

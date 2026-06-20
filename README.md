@@ -18,6 +18,7 @@ A currency conversion application built with Next.js and TypeScript. It allows u
 * TypeScript 
 * Tailwind CSS 
 * Zustand 
+* React Query
 * ExchangeRate API 
 * Git 
 * GitHub 

@@ -13,9 +13,6 @@ export default function useConvertedAmount() {
   const rates = data?.conversion_rates ?? {};
 
   return rates[baseCurrency] && rates[targetCurrency]
-    ? (
-        (amount * rates[targetCurrency]) /
-        rates[baseCurrency]
-      ).toFixed(3)
+    ? ((amount * rates[targetCurrency]) / rates[baseCurrency]).toFixed(3)
     : "";
 }
