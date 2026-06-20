@@ -1,6 +1,6 @@
 import { Loader } from "lucide-react";
 
-export default function EmptyState() {
+export default function LoadingState() {
   return (
     <div className="flex">
       <span className="animate-spin m-auto">

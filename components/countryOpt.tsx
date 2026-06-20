@@ -19,8 +19,7 @@ export default function CountryOpt({ value, onChange }: Props) {
     <>
       <Select defaultValue="Nigeria" value={value} onValueChange={onChange}>
         {" "}
-        <SelectTrigger className=" border-none outline-none focus:border-none focus:outline-none">
-          {" "}
+        <SelectTrigger className="border-none outline-none focus:border-none focus:outline-none">
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
@@ -34,7 +33,7 @@ export default function CountryOpt({ value, onChange }: Props) {
                   width={24}
                   height={24}
                 />
-                {country.label}
+                <p className="sm:text-sm text-xs">{country.label}</p>
               </span>
             </SelectItem>
           ))}

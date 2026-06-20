@@ -1,16 +1,16 @@
 "use client";
 
 import CountryOpt from "./countryOpt";
-import EmptyState from "./emptyState";
-
+import LoadingState from "./loadingState";
 import { useStore } from "@/store/global";
 import Swap from "./swap";
 import { useRates } from "@/hooks/useRates";
-import ConvertedAmount from "../hooks/useConvertedAmount";
+import useConvertedAmount from "../hooks/useConvertedAmount";
 import Comment from "./comment";
 
 export default function Converter() {
-  const { isLoading, isError } = useRates();
+  const {data, isLoading, isError } = useRates();
+  const convertedAmount = useConvertedAmount(data);
 
   const baseCurrency = useStore((state) => state.base);
   const setBaseCurrency = useStore((state) => state.setBase);
@@ -20,15 +20,14 @@ export default function Converter() {
   const setAmount = useStore((state) => state.setAmount);
 
   if (isLoading) {
-    return <EmptyState />;
+    <LoadingState />;
   }
   if (isError) return <p className="text-center mt-10">Failed to load rates</p>;
 
-  const convertedAmount = ConvertedAmount();
 
   return (
     <>
-      {isLoading ? (
+      {!isLoading ? (
         <div>
           <Comment />
           <div className="bg-linear-to-r from-green-950 to-blue-950 rounded-lg p-1">
@@ -36,7 +35,7 @@ export default function Converter() {
               <div className="grid rounded-lg p-3 bg-card">
                 <label htmlFor="from">From</label>
                 <div>
-                  <div className="flex items-center border rounded-lg">
+                  <div className="flex items-center border rounded-lg sm:text-sm text-xs">
                     <span>
                       <CountryOpt
                         value={baseCurrency}
@@ -46,7 +45,7 @@ export default function Converter() {
                     <span className="px-3 py-1">{baseCurrency}</span>
                   </div>
                   <input
-                    className="my-3 w-full md:h-20 sm:h-18 h-15 border outline-none pl-2 rounded-lg md:text-5xl text-4xl tracking-wider"
+                    className="my-3 w-full md:h-18 sm:h-15 h-13 border outline-none pl-2 rounded-lg md:text-5xl text-4xl tracking-wider"
                     value={amount.toLocaleString()}
                     id="from"
                     type="text"
@@ -59,7 +58,7 @@ export default function Converter() {
               <div className="grid rounded-lg p-3 bg-card [&_label]:tracking-widest">
                 <label htmlFor="to">To</label>
                 <div>
-                  <div className="flex items-center border rounded-lg">
+                  <div className="flex items-center border rounded-lg sm:text-sm text-xs">
                     <span>
                       <CountryOpt
                         value={targetCurrency}
@@ -69,7 +68,7 @@ export default function Converter() {
                     <span className=" px-3 py-1">{targetCurrency}</span>
                   </div>
                   <input
-                    className="my-3 w-full md:h-20 sm:h-18 h-15 border outline-none pl-2 rounded-lg md:text-5xl text-4xl"
+                    className="my-3 w-full md:h-18 sm:h-15 h-13 border outline-none pl-2 rounded-lg md:text-5xl text-4xl"
                     id="to"
                     type="text"
                     value={
@@ -86,7 +85,7 @@ export default function Converter() {
           </div>
         </div>
       ) : (
-        <EmptyState />
+        <LoadingState />
       )}
     </>
   );

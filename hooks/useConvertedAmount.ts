@@ -1,11 +1,8 @@
 "use client";
 
-import { useRates } from "./useRates";
 import { useStore } from "@/store/global";
 
-export default function useConvertedAmount() {
-  const { data } = useRates();
-
+export default function useConvertedAmount(data: any) {
   const baseCurrency = useStore((state) => state.base);
   const targetCurrency = useStore((state) => state.target);
   const amount = useStore((state) => state.amount);

@@ -2,16 +2,19 @@
 
 import { useStore } from "@/store/global";
 import useConvertedAmount from "../hooks/useConvertedAmount";
+import { useRates } from "@/hooks/useRates";
 
 export default function Comment() {
+  const { data } = useRates();
+  const convertedAmount = useConvertedAmount(data);
+
   const baseCurrency = useStore((state) => state.base);
   const targetCurrency = useStore((state) => state.target);
   const amount = useStore((state) => state.amount);
-  const convertedAmount = useConvertedAmount();
 
   return (
     <div>
-      <p className="md:text-3xl sm:text-2xl  text-lg text-center my-3 tracking-widest">
+      <p className="md:text-2xl sm:text-xl text-lg text-center my-2 tracking-widest">
         Your {amount} {baseCurrency} is worth {convertedAmount} {targetCurrency}{" "}
         😄{" "}
       </p>
