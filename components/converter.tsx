@@ -45,7 +45,7 @@ export default function Converter() {
                     <span className="px-3 py-1">{baseCurrency}</span>
                   </div>
                   <input
-                    className="my-3 w-full md:h-18 sm:h-15 h-13 border outline-none pl-2 rounded-lg md:text-5xl text-4xl tracking-wider"
+                    className="my-3 w-full md:h-18 sm:h-15 h-13 border outline-none pl-2 rounded-lg md:text-3xl text-2xl tracking-wider"
                     value={amount.toLocaleString()}
                     id="from"
                     type="text"
@@ -68,7 +68,7 @@ export default function Converter() {
                     <span className=" px-3 py-1">{targetCurrency}</span>
                   </div>
                   <input
-                    className="my-3 w-full md:h-18 sm:h-15 h-13 border outline-none pl-2 rounded-lg md:text-5xl text-4xl"
+                    className="my-3 w-full md:h-18 sm:h-15 h-13 border outline-none pl-2 rounded-lg md:text-3xl text-2xl"
                     id="to"
                     type="text"
                     value={
