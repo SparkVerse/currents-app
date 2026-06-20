@@ -16,10 +16,11 @@ export default function Converter() {
   const setTargetCurrency = useStore((state) => state.setTarget);
   const amount = useStore((state) => state.amount);
   const setAmount = useStore((state) => state.setAmount);
-  const convertedAmount = ConvertedAmount;
 
   if (isLoading) return <p className="text-center mt-10">Loading rates...</p>;
   if (isError) return <p className="text-center mt-10">Failed to load rates</p>;
+ 
+  const convertedAmount = ConvertedAmount();
 
   return (
     <>
