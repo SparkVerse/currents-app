@@ -14,7 +14,7 @@ export default function Comment() {
 
   return (
     <div>
-      <p className="md:text-lg sm:text-sm text-xs text-center my-2 tracking-widest">
+      <p className="md:text-lg sm:text-sm text-xs text-center mt-10 mb-2 tracking-widest">
         Your {amount} {baseCurrency} is worth {convertedAmount} {targetCurrency}{" "}
         😄{" "}
       </p>
